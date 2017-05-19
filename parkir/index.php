@@ -67,6 +67,16 @@ if($auth==SUCCESS && isset($action)){	//jika $action tidak null
 			$out=get($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
 			//Contoh Hasil: [{"nama":"albert"}]
 		break;
+		case "getListParkirSave":	
+			$sql="SELECT id,latitude,longitude,name
+					FROM parkir
+					LEFT JOIN parkir_save
+					ON parkir.id=parkir_save.id_parkir
+					WHERE parkir_save.customer='$id'
+					;";
+			$out=get($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
+			//Contoh Hasil: [{"nama":"albert"}]
+		break;
 		case "getDetailParkir":	
 			$parkirId=$_POST['parkir_id'];
 			$sql="SELECT id,latitude,longitude,name,address,price,capacity,available
@@ -74,6 +84,31 @@ if($auth==SUCCESS && isset($action)){	//jika $action tidak null
 					WHERE id='$parkirId'
 					;";
 			$out=get($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
+			//Contoh Hasil: [{"nama":"albert"}]
+		break;
+		case "checkParkirSave":	
+			$parkirId=$_POST['parkir_id'];
+			$sql="SELECT COUNT(*) as total
+					FROM parkir_save
+					WHERE customer='$id' AND id_parkir='$parkirId'
+					;";
+			$out=get($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
+			//Contoh Hasil: [{"nama":"albert"}]
+		break;
+		case "saveParkir":	
+			$parkirId=$_POST['parkir_id'];
+			$sql="INSERT INTO parkir_save(customer,id_parkir)
+					VALUES ('$id','$parkirId')
+					;";
+			$out=query($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
+			//Contoh Hasil: [{"nama":"albert"}]
+		break;
+		case "removeSaveParkir":	
+			$parkirId=$_POST['parkir_id'];
+			$sql="DELETE FROM parkir_save
+					WHERE customer='$id' AND id_parkir='$parkirId'
+					;";
+			$out=query($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
 			//Contoh Hasil: [{"nama":"albert"}]
 		break;
 

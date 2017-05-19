@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 18, 2017 at 05:11 pm
+-- Generation Time: May 19, 2017 at 11:34 am
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -80,6 +80,25 @@ CREATE TABLE IF NOT EXISTS `parkir_request` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `parkir_save`
+--
+
+CREATE TABLE IF NOT EXISTS `parkir_save` (
+  `customer` varchar(75) NOT NULL,
+  `id_parkir` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `parkir_save`
+--
+
+INSERT INTO `parkir_save` (`customer`, `id_parkir`) VALUES
+('albert@gmail.com', 3),
+('albert@gmail.com', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_admin`
 --
 
@@ -105,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `user_customer` (
 --
 
 INSERT INTO `user_customer` (`id`, `user_key`, `password`) VALUES
-('albert@gmail.com', 'aaaaa', 'eefa6fa9587d7cdd31b4ec44332087dc');
+('albert@gmail.com', 'aaaaa', '8c12752677f35e597bb1e1f53aef9d82');
 
 -- --------------------------------------------------------
 
@@ -139,6 +158,12 @@ ALTER TABLE `parkir_operator`
 --
 ALTER TABLE `parkir_request`
  ADD PRIMARY KEY (`id`), ADD KEY `user` (`user`);
+
+--
+-- Indexes for table `parkir_save`
+--
+ALTER TABLE `parkir_save`
+ ADD KEY `customer` (`customer`), ADD KEY `id_parkir` (`id_parkir`);
 
 --
 -- Indexes for table `user_admin`
@@ -188,6 +213,13 @@ ADD CONSTRAINT `fk_operator` FOREIGN KEY (`operator`) REFERENCES `user_operator`
 --
 ALTER TABLE `parkir_request`
 ADD CONSTRAINT `fk_user` FOREIGN KEY (`user`) REFERENCES `user_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `parkir_save`
+--
+ALTER TABLE `parkir_save`
+ADD CONSTRAINT `parkir_save_ibfk_1` FOREIGN KEY (`customer`) REFERENCES `user_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `parkir_save_ibfk_2` FOREIGN KEY (`id_parkir`) REFERENCES `parkir` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
