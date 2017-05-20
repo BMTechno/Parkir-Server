@@ -99,7 +99,7 @@ if($auth==SUCCESS && isset($action)){	//jika $action tidak null
 					FROM parkir
 					WHERE id='$parkirId'
 					;";
-			$out=get($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
+			$out=get($db,$sql);		//gunakan method get untuk ambitl data! $out= hasil return method get tadi
 			//Contoh Hasil: [{"nama":"albert"}]
 		break;
 		case "checkParkirSave":	
@@ -136,6 +136,19 @@ if($auth==SUCCESS && isset($action)){	//jika $action tidak null
 					;";
 			$out=query($db,$sql);		//gunakan method query! $out= hasil return method quert tadi
 			//contoh hasil: 1 	//1 berarti sukses
+		break;
+		case "requestParkir":	
+			$parkir_lat = $_POST['parkir_lat'];
+			$parkir_lng = $_POST['parkir_lng'];
+			$parkir_name = $_POST['parkir_name'];
+			$parkir_address = $_POST['parkir_address'];
+			$parkir_price = $_POST['parkir_price'];
+			$parkir_capacity = $_POST['parkir_capacity'];
+			$sql="INSERT INTO parkir_request(user,latitude,longitude,name,address,price,capacity)
+					VALUES ('$id','$parkir_lat','$parkir_lng','$parkir_name','$parkir_address','$parkir_price','$parkir_capacity')
+					;";
+			$out=query($db,$sql);		//gunakan method get untuk ambil data! $out= hasil return method get tadi
+			//Contoh Hasil: [{"nama":"albert"}]
 		break;
 
 		case "updateMhs":

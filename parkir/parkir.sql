@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 19, 2017 at 11:34 am
+-- Generation Time: May 20, 2017 at 09:11 am
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -74,8 +74,19 @@ CREATE TABLE IF NOT EXISTS `parkir_request` (
   `name` varchar(25) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `price` text,
-  `picture_dir` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `capacity` int(5) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `parkir_request`
+--
+
+INSERT INTO `parkir_request` (`id`, `user`, `latitude`, `longitude`, `name`, `address`, `price`, `capacity`) VALUES
+(8, 'a@gmail.com', '99.99999999', '222.00000000', 'aa', 'aaaa', 'a', 200),
+(9, 'a@gmail.com', '99.99999999', '222.00000000', 'aa', 'aa', 'aaa', 444),
+(10, 'a@gmail.com', '-6.59980470', '106.80700670', 'sss', 'aa', 'aa', 74),
+(11, 'a@gmail.com', '-6.59980470', '106.80700670', 'qqqqq', 'qqqq', 'aaa', 123),
+(12, 'a@gmail.com', '-6.59980470', '106.80700670', 'tre', 'qwe', '123', 444);
 
 -- --------------------------------------------------------
 
@@ -93,8 +104,7 @@ CREATE TABLE IF NOT EXISTS `parkir_save` (
 --
 
 INSERT INTO `parkir_save` (`customer`, `id_parkir`) VALUES
-('albert@gmail.com', 3),
-('albert@gmail.com', 1);
+('a@gmail.com', 5);
 
 -- --------------------------------------------------------
 
@@ -124,7 +134,8 @@ CREATE TABLE IF NOT EXISTS `user_customer` (
 --
 
 INSERT INTO `user_customer` (`id`, `user_key`, `password`) VALUES
-('albert@gmail.com', 'aaaaa', '8c12752677f35e597bb1e1f53aef9d82');
+('a@gmail.com', 'aaaaa', 'eb074f73819c85db0cf8bc99819b8481'),
+('albert@gmail.com', 'aaaaa', '205ad8ca334f0b6b16947f8ac5202f9d');
 
 -- --------------------------------------------------------
 
@@ -196,7 +207,7 @@ MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `parkir_request`
 --
 ALTER TABLE `parkir_request`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --
