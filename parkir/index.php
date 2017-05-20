@@ -14,6 +14,7 @@ $db = new MySQL($dbHost,$dbUsername,$dbPassword,$dbName);
 define("SUCCESS", 0);	//signal success
 define("FAILED", 1);	//signal failed
 define("ERROR", 2);		//signal error
+define("AUTHFAILED", 6);	//signal failed
 
 $out=0;
 
@@ -24,8 +25,7 @@ $password='';
 $action = $_POST['action'];		//ambil isi data pada variable 'action' yg di post client
 $id = $_POST['id'];
 $password=$_POST['password'];
-$auth=auth($db,$id,$password);
-
+$auth=FAILED;
 if($action=="login"){
 	$sql="SELECT * FROM user_customer WHERE id='$id' AND user_key='$password'";
 	if($db->query($sql)){
@@ -51,13 +51,29 @@ if($action=="login"){
 	else
 		$out=FAILED;
 }
-else if($action=="auth"){
+else if($action=="register"){
+	$sql="SELECT * FROM user_customer WHERE id='$id' AND user_key='$password'";
+	if($db->query($sql)){
+		if($db->fetchRow($sql)==null){
+			$sql="INSERT INTO user_customer(id,user_key)
+					VALUES ('$id','$password')";
+			$out=query($db,$sql);
+			//$out=$sql;
+		}
+		else
+			$out=FAILED;
+	}
+	else
+		$out=FAILED;
+}
+else{
+	$auth=auth($db,$id,$password);
 	if($auth==SUCCESS)
 		$out=SUCCESS;
 	else
 		$out=FAILED;
 }
-$out=$out;
+
 if($auth==SUCCESS && isset($action)){	//jika $action tidak null
 	switch($action) {
 		case "getListParkir":	
