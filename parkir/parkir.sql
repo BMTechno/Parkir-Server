@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2017 at 09:11 am
+-- Generation Time: May 31, 2017 at 12:05 pm
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `parkir` (
 --
 
 INSERT INTO `parkir` (`id`, `latitude`, `longitude`, `name`, `address`, `price`, `picture_dir`, `capacity`, `available`) VALUES
-(1, '-6.59963240', '106.80693690', 'Gedung Ekstensi IPB', 'Jl. Ekstensi Ilkom', '2000', NULL, 800, 500),
+(1, '-6.59963240', '106.80693690', 'Gedung Ekstensi IPB', 'Jl. Ekstensi Ilkom', '2000', NULL, 500, 222),
 (2, '-6.58954960', '106.80402610', 'Botani Square', 'Jl. botani', '5000', NULL, 2500, 2100),
 (3, '-6.58958430', '106.80621170', 'Diploma IPB', 'Jl. diploma', '0', NULL, 500, 300),
 (4, '-6.61236910', '106.81193820', 'Taman Kencana', 'Jl. Taman Kencana', '2000', NULL, 100, 50),
@@ -60,6 +60,14 @@ CREATE TABLE IF NOT EXISTS `parkir_operator` (
   `operator` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `parkir_operator`
+--
+
+INSERT INTO `parkir_operator` (`id_parkir`, `operator`) VALUES
+(1, 'steve@gmail.com'),
+(1, 'budi@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -75,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `parkir_request` (
   `address` varchar(100) DEFAULT NULL,
   `price` text,
   `capacity` int(5) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `parkir_request`
@@ -86,7 +94,12 @@ INSERT INTO `parkir_request` (`id`, `user`, `latitude`, `longitude`, `name`, `ad
 (9, 'a@gmail.com', '99.99999999', '222.00000000', 'aa', 'aa', 'aaa', 444),
 (10, 'a@gmail.com', '-6.59980470', '106.80700670', 'sss', 'aa', 'aa', 74),
 (11, 'a@gmail.com', '-6.59980470', '106.80700670', 'qqqqq', 'qqqq', 'aaa', 123),
-(12, 'a@gmail.com', '-6.59980470', '106.80700670', 'tre', 'qwe', '123', 444);
+(12, 'a@gmail.com', '-6.59980470', '106.80700670', 'tre', 'qwe', '123', 444),
+(13, 'a@gmail.com', '-6.59980470', '106.80700670', 'dff', 't', '5', 55),
+(14, 'a@gmail.com', '-6.59980470', '106.80700670', 'aa', 'aa', '11', 444),
+(15, 'albert@gmail.com', '-6.59983344', '106.80699527', 'aaa', 'aaa', '444', 213),
+(16, 'albert@gmail.com', '-6.36395750', '106.70512109', 'avc', 'Jl. aPerumahan Bukit Dago, Rawakalong, Gn. Sindur, Bogor, Jawa Barat 16340, Indonesia', '4444', 444),
+(17, 'albert@gmail.com', '99.99999999', '222.00000000', 'Aa', 'Jalan Pajajaran Bogor', '2000', 0);
 
 -- --------------------------------------------------------
 
@@ -104,7 +117,9 @@ CREATE TABLE IF NOT EXISTS `parkir_save` (
 --
 
 INSERT INTO `parkir_save` (`customer`, `id_parkir`) VALUES
-('a@gmail.com', 5);
+('a@gmail.com', 5),
+('a@gmail.com', 3),
+('albert@gmail.com', 3);
 
 -- --------------------------------------------------------
 
@@ -126,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `user_admin` (
 CREATE TABLE IF NOT EXISTS `user_customer` (
   `id` varchar(75) NOT NULL,
   `user_key` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -135,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `user_customer` (
 
 INSERT INTO `user_customer` (`id`, `user_key`, `password`) VALUES
 ('a@gmail.com', 'aaaaa', 'eb074f73819c85db0cf8bc99819b8481'),
-('albert@gmail.com', 'aaaaa', '205ad8ca334f0b6b16947f8ac5202f9d');
+('albert@gmail.com', 'aaaaa', 'ad2cdf944c7f5852bbed446983bc289e');
 
 -- --------------------------------------------------------
 
@@ -144,9 +159,18 @@ INSERT INTO `user_customer` (`id`, `user_key`, `password`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `user_operator` (
-  `username` varchar(25) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `id` varchar(25) NOT NULL,
+  `user_key` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_operator`
+--
+
+INSERT INTO `user_operator` (`id`, `user_key`, `password`) VALUES
+('budi@gmail.com', 'aaaaa', NULL),
+('steve@gmail.com', 'aaaaa', '2f06356139771eabe1be97e456839409');
 
 --
 -- Indexes for dumped tables
@@ -192,7 +216,7 @@ ALTER TABLE `user_customer`
 -- Indexes for table `user_operator`
 --
 ALTER TABLE `user_operator`
- ADD PRIMARY KEY (`username`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -207,7 +231,7 @@ MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `parkir_request`
 --
 ALTER TABLE `parkir_request`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
@@ -217,7 +241,7 @@ MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 ALTER TABLE `parkir_operator`
 ADD CONSTRAINT `fk_id_parkir` FOREIGN KEY (`id_parkir`) REFERENCES `parkir` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `fk_operator` FOREIGN KEY (`operator`) REFERENCES `user_operator` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `fk_operator` FOREIGN KEY (`operator`) REFERENCES `user_operator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `parkir_request`
