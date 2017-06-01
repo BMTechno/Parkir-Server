@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 31, 2017 at 12:05 pm
+-- Generation Time: Jun 01, 2017 at 04:46 pm
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -36,18 +36,23 @@ CREATE TABLE IF NOT EXISTS `parkir` (
   `picture_dir` varchar(50) DEFAULT NULL,
   `capacity` int(5) DEFAULT NULL,
   `available` int(5) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `parkir`
 --
 
 INSERT INTO `parkir` (`id`, `latitude`, `longitude`, `name`, `address`, `price`, `picture_dir`, `capacity`, `available`) VALUES
-(1, '-6.59963240', '106.80693690', 'Gedung Ekstensi IPB', 'Jl. Ekstensi Ilkom', '2000', NULL, 500, 222),
+(1, '-6.59963240', '106.80693690', 'Gedung Ekstensi IPB', 'Jl. Ekstensi Ilkom', '1000', NULL, 500, 222),
 (2, '-6.58954960', '106.80402610', 'Botani Square', 'Jl. botani', '5000', NULL, 2500, 2100),
 (3, '-6.58958430', '106.80621170', 'Diploma IPB', 'Jl. diploma', '0', NULL, 500, 300),
 (4, '-6.61236910', '106.81193820', 'Taman Kencana', 'Jl. Taman Kencana', '2000', NULL, 100, 50),
-(5, '-6.59648790', '106.80736270', 'Universitas Pakuan', 'Jl. Universitas Pakuan', '2000', NULL, 1100, 500);
+(5, '-6.59648790', '106.80736270', 'Universitas Pakuan', 'Jl. Universitas Pakuan', '2000', NULL, 1100, 500),
+(8, '-6.59980470', '106.80700670', 'tre', 'qwe', '123', NULL, 444, NULL),
+(9, '-6.59983344', '106.80699527', 'aaa', 'aaa', '444', NULL, 213, NULL),
+(10, '-6.60615750', '106.80901953', 'pizza hut', 'Jl. Padjadjaran No.3, Baranangsiang, Bogor Tim., Kota Bogor, Jawa Barat 16143, Indonesia', '2000', NULL, 200, 200),
+(11, '-6.36395750', '106.70512109', 'Bukit Dago Sport Center', 'Jl. Perumahan Bukit Dago, Rawakalong, Gn. Sindur, Bogor, Jawa Barat 16340, Indonesia', '2000', NULL, 100, NULL),
+(14, '-6.60212250', '106.80445703', 'Jalan bangka', 'Jl. Bangka No.1A, Baranangsiang, Bogor Tim., Kota Bogor, Jawa Barat 16143, Indonesia', '', NULL, 200, 200);
 
 -- --------------------------------------------------------
 
@@ -83,23 +88,7 @@ CREATE TABLE IF NOT EXISTS `parkir_request` (
   `address` varchar(100) DEFAULT NULL,
   `price` text,
   `capacity` int(5) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `parkir_request`
---
-
-INSERT INTO `parkir_request` (`id`, `user`, `latitude`, `longitude`, `name`, `address`, `price`, `capacity`) VALUES
-(8, 'a@gmail.com', '99.99999999', '222.00000000', 'aa', 'aaaa', 'a', 200),
-(9, 'a@gmail.com', '99.99999999', '222.00000000', 'aa', 'aa', 'aaa', 444),
-(10, 'a@gmail.com', '-6.59980470', '106.80700670', 'sss', 'aa', 'aa', 74),
-(11, 'a@gmail.com', '-6.59980470', '106.80700670', 'qqqqq', 'qqqq', 'aaa', 123),
-(12, 'a@gmail.com', '-6.59980470', '106.80700670', 'tre', 'qwe', '123', 444),
-(13, 'a@gmail.com', '-6.59980470', '106.80700670', 'dff', 't', '5', 55),
-(14, 'a@gmail.com', '-6.59980470', '106.80700670', 'aa', 'aa', '11', 444),
-(15, 'albert@gmail.com', '-6.59983344', '106.80699527', 'aaa', 'aaa', '444', 213),
-(16, 'albert@gmail.com', '-6.36395750', '106.70512109', 'avc', 'Jl. aPerumahan Bukit Dago, Rawakalong, Gn. Sindur, Bogor, Jawa Barat 16340, Indonesia', '4444', 444),
-(17, 'albert@gmail.com', '99.99999999', '222.00000000', 'Aa', 'Jalan Pajajaran Bogor', '2000', 0);
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -128,9 +117,17 @@ INSERT INTO `parkir_save` (`customer`, `id_parkir`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `user_admin` (
-  `username` varchar(25) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `id` varchar(25) NOT NULL,
+  `user_key` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_admin`
+--
+
+INSERT INTO `user_admin` (`id`, `user_key`, `password`) VALUES
+('parkiradmin@gmail.com', 'aaaaa', '07c0bbfd0e894362cd8b1487285a7e11');
 
 -- --------------------------------------------------------
 
@@ -150,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `user_customer` (
 
 INSERT INTO `user_customer` (`id`, `user_key`, `password`) VALUES
 ('a@gmail.com', 'aaaaa', 'eb074f73819c85db0cf8bc99819b8481'),
-('albert@gmail.com', 'aaaaa', 'ad2cdf944c7f5852bbed446983bc289e');
+('albert@gmail.com', 'aaaaa', '6b36e4557a73a3fc939962c9841efe82');
 
 -- --------------------------------------------------------
 
@@ -170,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `user_operator` (
 
 INSERT INTO `user_operator` (`id`, `user_key`, `password`) VALUES
 ('budi@gmail.com', 'aaaaa', NULL),
-('steve@gmail.com', 'aaaaa', '2f06356139771eabe1be97e456839409');
+('steve@gmail.com', 'aaaaa', '158205a5c2e3ee0ce54d63300b8395db');
 
 --
 -- Indexes for dumped tables
@@ -204,7 +201,7 @@ ALTER TABLE `parkir_save`
 -- Indexes for table `user_admin`
 --
 ALTER TABLE `user_admin`
- ADD PRIMARY KEY (`username`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_customer`
@@ -226,12 +223,12 @@ ALTER TABLE `user_operator`
 -- AUTO_INCREMENT for table `parkir`
 --
 ALTER TABLE `parkir`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `parkir_request`
 --
 ALTER TABLE `parkir_request`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --
